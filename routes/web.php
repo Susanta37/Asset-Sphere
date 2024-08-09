@@ -86,6 +86,9 @@ Route::get('/okcl/asset', [AssetController::class, 'index'])
     ->name('okcl.asset');
 
  Route::post('/assets/store', [AssetController::class, 'store'])->name('assets.store');
+ Route::resource('admin/asset', AssetController::class);
+
+
 
  Route::get('/okcl/component', [ComponentController ::class, 'index'])
     ->middleware(['auth', 'verified', 'okcl'])

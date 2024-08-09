@@ -201,8 +201,71 @@
                     </div>
                 </div>
             </div>
-            
+
+
             <div class="col-md-5 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">To Do Lists</h4>
+
+            <!-- Display Success Message -->
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <!-- Display To-Do List -->
+            @if($tasks->isEmpty()) 
+                <p>No to-do list available.</p>
+            @else
+                <div class="list-wrapper pt-2">
+                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                        @foreach($tasks as $task)
+                            <li class="{{ $task->completed ? 'completed' : '' }}">
+                                <!-- Update Task Status -->
+                                <form action="{{ route('todolist.update', $task->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-check form-check-flat">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" name="completed" 
+                                            {{ $task->completed ? 'checked' : '' }} 
+                                            onchange="this.form.submit()">
+                                            {{ $task->task }}
+                                        </label>
+                                    </div>
+                                </form>
+
+                                <!-- Delete Task -->
+                                <form action="{{ route('todolist.destroy', $task->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-link remove ti-close">X</button>
+                                </form>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <!-- Add New Task -->
+            <div class="add-items d-flex mb-0 mt-2">
+                <form action="{{ route('todolist.store') }}" method="POST" class="d-flex w-100">
+                    @csrf
+                    <input type="text" class="form-control todo-list-input" name="task" placeholder="Add new task">
+                    <button type="submit" class="add btn btn-primary todo-list-add-btn">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+            
+            <!-- <div class="col-md-5 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">To Do Lists</h4>
@@ -236,17 +299,19 @@
                 </div>
             @endif
             <div class="add-items d-flex mb-0 mt-2">
-                <form action="{{ route('todolist.store') }}" method="POST" class="d-flex w-100">
-                    @csrf
-                    <input type="text" class="form-control todo-list-input" name="task" placeholder="Add new task">
-                    <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent">
-                        <i class="icon-circle-plus"></i>
-                    </button>
-                </form>
+            <form action="{{ route('todolist.store') }}" method="POST" class="d-flex w-100">
+    @csrf
+    <input type="text" class="form-control todo-list-input" name="task" placeholder="Add new task">
+    <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent">
+        <i class="icon-circle-plus"></i>
+    </button>
+</form>
+
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
 
         </div>
 

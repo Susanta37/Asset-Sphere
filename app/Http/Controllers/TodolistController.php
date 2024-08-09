@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Todolist;
@@ -22,9 +21,7 @@ class TodolistController extends Controller
 
     public function update(Request $request, Todolist $todolist)
     {
-        
         $todolist->update(['completed' => $request->has('completed')]);
-        
         return redirect()->route('okcl.dashboard')->with('success', 'Task status updated successfully.');
     }
 
