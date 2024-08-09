@@ -1,9 +1,29 @@
+
+<!-- Toastify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<!-- Toastify JS -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                    @if(session('success'))
+<script>
+    Toastify({
+        text: "{{ session('success') }}",
+        duration: 3000, 
+        gravity: "top", 
+        position: "center", 
+        backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)", 
+        stopOnFocus: true, 
+    }).showToast();
+</script>
+@endif
+
                         <h3 class="font-weight-bold">
                             Welcome
                             @if (Auth::user())
@@ -669,4 +689,14 @@
 
     </footer>
     <!-- partial -->
+     <script>
+        setTimeout(function() {
+    let alert = document.querySelector('.alert');
+    if (alert) {
+        alert.classList.remove('show');
+        alert.classList.add('fade');
+    }
+}, 3000); // The alert will disappear after 3 seconds
+
+     </script>
 </div>

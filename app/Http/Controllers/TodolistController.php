@@ -15,7 +15,6 @@ class TodolistController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate(['task' => 'required|string|max:255']);
         Todolist::create(['task' => $request->task, 'completed' => false]);
         return redirect()->route('okcl.dashboard')->with('success', 'Task added successfully.');

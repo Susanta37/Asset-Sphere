@@ -18,7 +18,7 @@
     <script src="/js/Chart.roundedBarCharts.js"></script>
     
     
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
@@ -62,4 +62,4 @@
                 alert("Geolocation is not supported by this browser.");
             }
         });
-    </script>
+    </script> -->
